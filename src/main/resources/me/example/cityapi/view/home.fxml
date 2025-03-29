@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <VBox alignment="CENTER" prefHeight="450.0" prefWidth="600.0" spacing="20.0"
-      stylesheets="@../../../../me.example.cityapi.css/styles.css"
+      stylesheets="@../css/styles.css"
       xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="me.example.cityapi.controller.HomeController">
     <padding>
