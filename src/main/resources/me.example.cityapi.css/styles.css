@@ -1,0 +1,22 @@
+.root {
+    -fx-primary-color: #087fa3;
+    -fx-primary-dark-color: #13527a;
+    -fx-white-color: white;
+    -fx-black-color: black;
+}
+
+.button {
+    -fx-background-color: -fx-white-color;
+    -fx-text-fill: -fx-black-color;
+    -fx-border-color: transparent;
+    -fx-background-radius: 20;
+}
+
+.button:hover {
+    -fx-background-color: -fx-primary-dark-color;
+    -fx-text-fill: -fx-white-color;
+}
+
+VBox {
+    -fx-background-color: -fx-primary-color;
+} 
