@@ -3,6 +3,7 @@
     -fx-primary-dark-color: #13527a;
     -fx-white-color: white;
     -fx-black-color: black;
+    -fx-grey-color: #a6a6a6;
 }
 
 .button {
@@ -15,6 +16,21 @@
 .button:hover {
     -fx-background-color: -fx-primary-dark-color;
     -fx-text-fill: -fx-white-color;
+}
+
+.parking-box-top {
+    -fx-background-color: -fx-white-color;
+    -fx-background-radius: 0 35 0 0;
+}
+
+.parking-box-bottom {
+    -fx-background-color: -fx-grey-color;
+    -fx-background-radius: 0 0 0 35;
+}
+
+.parking-box-text {
+    -fx-text-fill: -fx-black-color;
+    -fx-font-size: 16px;
 }
 
 VBox {
