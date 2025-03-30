@@ -35,7 +35,7 @@
                 </Label>
             </HBox>
         </StackPane>
-        <Button fx:id="showTabWVButton" mnemonicParsing="false" text="Show tab">
+        <Button fx:id="showTabWVButton" onAction="#onShowTabWVButtonClick" mnemonicParsing="false" text="Show tab">
             <font>
                 <Font size="15.0"/>
             </font>

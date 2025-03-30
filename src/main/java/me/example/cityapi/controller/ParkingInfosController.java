@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import me.example.cityapi.model.Parking;
 import me.example.cityapi.data.ParkingApiClient;
 import me.example.cityapi.ui.DoubleContainer;
+import javafx.scene.web.WebView;
+import javafx.scene.web.WebEngine;
 
 import java.io.IOException;
 import java.util.List;
@@ -82,5 +84,18 @@ public class ParkingInfosController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    protected void onShowTabWVButtonClick() {
+        Stage webStage = new Stage();
+        WebView webView = new WebView();
+        WebEngine webEngine = webView.getEngine();
+        webEngine.load("https://data.nantesmetropole.fr/explore/dataset/244400404_parkings-publics-nantes-disponibilites/custom/?disjunctive.grp_nom&disjunctive.grp_statut");
+        
+        Scene scene = new Scene(webView, 1024, 768);
+        webStage.setScene(scene);
+        webStage.setTitle("Parkings Nantes Métropole - Données");
+        webStage.show();
     }
 } 

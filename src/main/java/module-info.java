@@ -3,6 +3,7 @@ module me.example.cityapi {
     requires transitive javafx.fxml;
     requires okhttp3;
     requires com.fasterxml.jackson.databind;
+    requires transitive javafx.web;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
