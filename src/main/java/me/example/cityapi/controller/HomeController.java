@@ -23,8 +23,15 @@ public class HomeController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/me/example/cityapi/view/parking-infos.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             
+            // Définir la couleur de fond de la scène
+//            scene.getRoot().setStyle("-fx-background-color: -fx-primary-color;");
+
             Stage stage = (Stage) showButton.getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
             stage.setTitle("Parking Infos");
+            stage.setWidth(width);
+            stage.setHeight(height);
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
