@@ -22,8 +22,19 @@
                 </font>
             </Button>
         </HBox>
-        <FlowPane fx:id="parkingGrid" alignment="BASELINE_LEFT" columnHalignment="CENTER" hgap="15.0" prefHeight="200.0"
-                  prefWidth="200.0" vgap="15.0" VBox.vgrow="ALWAYS"/>
+        <StackPane VBox.vgrow="ALWAYS">
+            <FlowPane fx:id="parkingGrid" alignment="BASELINE_LEFT" columnHalignment="CENTER" hgap="15.0"
+                      prefHeight="200.0" prefWidth="200.0" vgap="15.0"/>
+            <HBox fx:id="loadingContainer" alignment="CENTER" spacing="10" visible="false">
+                <ProgressIndicator fx:id="loadingIndicator" prefHeight="30.0" prefWidth="30.0"
+                                   style="-fx-progress-color: white;"/>
+                <Label fx:id="loadingLabel" text="Loading..." textFill="WHITE">
+                    <font>
+                        <Font size="16.0"/>
+                    </font>
+                </Label>
+            </HBox>
+        </StackPane>
         <Button fx:id="showTabWVButton" mnemonicParsing="false" text="Show tab">
             <font>
                 <Font size="15.0"/>

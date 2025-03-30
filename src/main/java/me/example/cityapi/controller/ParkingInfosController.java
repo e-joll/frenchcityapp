@@ -3,7 +3,9 @@ package me.example.cityapi.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -23,6 +25,12 @@ public class ParkingInfosController {
     public Button backButton;
     @FXML
     public Button showTabWVButton;
+    @FXML
+    public ProgressIndicator loadingIndicator;
+    @FXML
+    public HBox loadingContainer;
+    @FXML
+    public Label loadingLabel;
 
     private final ParkingApiClient parkingService;
 
@@ -32,20 +40,34 @@ public class ParkingInfosController {
 
     @FXML
     public void initialize() {
-        try {
-            List<Parking> parkings = parkingService.getParkings();
+        loadParkings();
+    }
 
-            for (Parking parking : parkings) {
-                DoubleContainer doubleContainer = new DoubleContainer();
-                doubleContainer.getTopLabel().setText(parking.getName());
-                doubleContainer.getBottomLabel().setText(String.format("Available spaces: %d\nUser spaces: %d",
-                        parking.getAvailableSpaces(),
-                        parking.getUserSpaces()));
-                parkingGrid.getChildren().add(doubleContainer.getMainContainer());
+    private void loadParkings() {
+        loadingContainer.setVisible(true);
+        parkingGrid.getChildren().clear();
+
+        new Thread(() -> {
+            try {
+                List<Parking> parkings = parkingService.getParkings();
+                javafx.application.Platform.runLater(() -> {
+                    for (Parking parking : parkings) {
+                        DoubleContainer doubleContainer = new DoubleContainer();
+                        doubleContainer.getTopLabel().setText(parking.getName());
+                        doubleContainer.getBottomLabel().setText(String.format("Available spaces: %d\nUser spaces: %d",
+                                parking.getAvailableSpaces(),
+                                parking.getUserSpaces()));
+                        parkingGrid.getChildren().add(doubleContainer.getMainContainer());
+                    }
+                    loadingContainer.setVisible(false);
+                });
+            } catch (IOException e) {
+                javafx.application.Platform.runLater(() -> {
+                    e.printStackTrace();
+                    loadingContainer.setVisible(false);
+                });
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        }).start();
     }
 
     @FXML
