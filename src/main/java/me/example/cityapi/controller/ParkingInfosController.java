@@ -3,22 +3,16 @@ package me.example.cityapi.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.io.IOException;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.StrokeType;
-import javafx.scene.shape.StrokeLineJoin;
-import javafx.scene.shape.StrokeLineCap;
+import me.example.cityapi.model.Parking;
+import me.example.cityapi.data.ParkingApiClient;
 import me.example.cityapi.ui.DoubleContainer;
+
+import java.io.IOException;
+import java.util.List;
 
 public class ParkingInfosController {
     @FXML
@@ -30,14 +24,27 @@ public class ParkingInfosController {
     @FXML
     public Button showTabWVButton;
 
-    public ParkingInfosController() { }
+    private final ParkingApiClient parkingService;
+
+    public ParkingInfosController() {
+        this.parkingService = new ParkingApiClient();
+    }
 
     @FXML
     public void initialize() {
-        // Add parkingBox test
-        for (int i = 0; i < 5; i++) {
-            DoubleContainer doubleContainer = new DoubleContainer();
-            parkingGrid.getChildren().add(doubleContainer.getMainContainer());
+        try {
+            List<Parking> parkings = parkingService.getParkings();
+
+            for (Parking parking : parkings) {
+                DoubleContainer doubleContainer = new DoubleContainer();
+                doubleContainer.getTopLabel().setText(parking.getName());
+                doubleContainer.getBottomLabel().setText(String.format("Available spaces: %d\nUser spaces: %d",
+                        parking.getAvailableSpaces(),
+                        parking.getUserSpaces()));
+                parkingGrid.getChildren().add(doubleContainer.getMainContainer());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
